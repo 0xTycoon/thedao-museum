@@ -1,0 +1,17 @@
+<!--
+
+The original blog post http://archive.is/wOiUZ
+
+crowd sale rules: 2 weeks 1:1, 10 days increase 5%, last 4 days 1:1.5
+
+etrabalance transactions https://raw.githubusercontent.com/bokkypoobah/TheDAOData/master/CreatedTokenEventsWithNonZeroExtraBalance_v4.txt
+
+
+ETh raised:
+
+344907.7 ETH exta bal
+11727774.78
+
+wiki https://daowiki.atlassian.net/wiki/spaces/DAO/pages/5996662/Introduction+to+the+DAO
+
+-->

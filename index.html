@@ -1,0 +1,2658 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="thedao-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TheDao token museum</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/toastr.min.css">
+    <style>
+
+        body {
+            padding-top: 110px;
+            padding-bottom: 3em;
+            background: rgb(234, 234, 235);
+            background: linear-gradient(90deg, rgba(234, 234, 235, 1) 0%, rgba(32, 99, 149, 0.19121151878720233) 97%);
+        }
+
+        .tab-pane {
+            border: solid 0 blue;
+            border-bottom: 1px solid;
+            border-left: 1px solid;
+            border-radius: 0px 0px 15px 15px;
+            background: white;
+            padding: 1em;
+        }
+
+        .nav-link {
+            border-left: 1px solid black !important;
+            border-right: 1px solid black !important;
+            border-top: 1px solid black !important;
+            background: gainsboro;
+        }
+
+
+        #dapp {
+            box-shadow: 1px 1px 15px 5px #ccbaba;
+            border: 1px solid #bebebe;
+            border-radius: 25px;
+            background: rgb(255, 214, 214);
+            background: radial-gradient(circle, rgba(255, 214, 214, 1) 0%, rgba(245, 245, 245, 1) 100%);
+        }
+
+        #EthToDaoOutput, #DaoToEthOutput {
+            font-weight: bold;
+
+        }
+
+        .mm-settings {
+        }
+
+        .navbar {
+            background-color: #206395 !important;
+        }
+
+        .highImpact {
+            font-weight: bold;
+            color: darkred;
+            text-shadow: 0px 0px 1em #ffeb3b;
+        }
+
+        #convert {
+            /* display: none; */
+            background-color: #e2e1ff;
+            border-radius: 10px;
+            padding: 0.5em;
+        }
+
+        #eth-out, #dao-out {
+            font-family: 'Courier New', monospace;
+            min-width: 6em;
+        }
+
+        .numeric {
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            background-color: #e3eeff;
+        }
+
+        #eth-address {
+            min-width: 28em;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 0.8rem;
+        }
+
+        #query-result {
+            display: none;
+        }
+
+        .address {
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            font-size: smaller;
+        }
+
+        .withdraw-info {
+            color: #6c757d;
+            font-size: smaller;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#"><img src="img/thedao.png" width="111" height="50"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <button type="button" class=" my-2 my-lg-0 btn-primary" id="connect">Connect Wallet</button>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            <h1>🏛️ TheDao Museum 🏛️</h1>
+
+            <p class="lead">TheDao (DAO) is probably a token with the most historic significance on Ethereum, <br>
+                and now it has become a scarce collector&#39;s item!</p>
+            <p>
+                The first DAO token transfer was made on 2016-May-28, about 6 months after the ERC20 standard was
+                created.
+            </p>
+            <p>It has been mostly forgotten and left to rot. De-listed from exchanges, removed from market-cap tracking
+                sites.<br>
+            </p>
+            <p>But, did you know, TheDAO contract is still alive and running, and the original tokens still exist, <b>complete with their entire history</b>?</p>
+            <p>Yes, of course. TheDAO still lives on the Ethereum blockchain with all its transaction history intact. Contrary to what some believe, TheDAO was never reversed - all what happened was, the ETH that was still under TheDAO's custody moved to another contract where it was secured.  The fateful bug that was used for the exploit is still in there, so TheDAO cannot hold any ETH. However, the tokens are SAFU<sup>tm</sup>  </p>
+
+            <p>The token conforms the ERC20 spec, which means it works with things in DeFi, including Uniswap, and
+                can be
+                transferred between users</p>
+            <h3>
+                There will never be more than 1,153,816,598 DAO tokens, and over 99% were forever taken out of circulation so far. (More details below)
+            </h3>
+            <p>The contract for TheDAO is <a class="address"
+                                             href="https://etherscan.io/address/0xbb9bc244d798123fde783fcc1c72d3bb8c189413">0xbb9bc244d798123fde783fcc1c72d3bb8c189413</a>
+            </p>
+
+            <h3>Holder stats 📈</h3>
+            <p>
+                There are over 7k holders<br>
+                The fully-diluted supply is 1,153,816,598 DAO, but 99% was forever burned and sitting in the
+                WithdrawDao* smart
+                contract. <br>
+                So only %1 is circulating, but the number could be much less than that.<br>
+                Each 100 DAO in circulation is backed by 1 ETH. <br>
+                This is because, there is a special smart contract called the
+                &quot;<a href="https://etherscan.io/address/0xbf4ed7b27f1d666546e30d74d50d173d20bca754">WithdrawDAO</a>&quot;
+                which sends you back 1 ETH for every 100 DAO.<br>
+
+                It's also impossible to mint
+                new tokens, so the circulating supply will only continue to shrink as people withdraw.
+
+            </p>
+            <p>Many of the <a href="https://etherscan.io/token/0xbb9bc244d798123fde783fcc1c72d3bb8c189413#balances">top
+                holders</a> appear to be dead, long forgotten wallets.</p>
+
+            <p style="font-size: smaller">
+                * The WithdrawDao is a special smart contract that can be used to convert DAO to ETH, where 100 DAO will
+                always
+                give you 1 ETH.
+            </p>
+            <p style="font-size: smaller">
+                IMPORTANT! Never send DAO tokens the WithdrawDAO directly, or you will lose them. You will need to call
+                the
+                withdraw method instead)
+            </p>
+            <h3>TheDAO on Uniswap 🦄</h3>
+            <p>It appears that a "DAO whale" has seeded a <a
+                    href="https://v2.info.uniswap.org/pair/0xe1ecadb5fec254c2c893c230b935db30b8fff0db">Uniswap V2
+                pool</a> with at least 9.8k DAO tokens! (Uniswap info page is wrong, it's not 9.8 mil)</p>
+            <p>However, TheDAO token is currently not compatible with the Uniswap UI!</p>
+            <p>
+                This is because the 'symbol' and 'decimal' properties are missing. <br>
+                These are marked as optional in the ERC20 standard, but all modern tokens are expected to have them.<br>
+                This problem only breaks the front-ends. For eg. places like 1nch and Sushiswap break as soon as you
+                try to add theDAO token.<br>
+                Uniswap shows UNKNOWN for the symbol and the values are displayed using the low-level 'wei' unit
+                instead.<br>
+                Perhaps these bugs might get fixed in the future, since they only affect the front-end.<br>
+
+            </p>
+            <h4 id="mm-add">Add the token to your wallet first</h4>
+            <div class="alert alert-warning" role="alert">Important: Please add the DAO token to Metamask <b>before</b>
+                doing anything!
+            </div>
+            <p>This can be done by clicking the <b>Add Token</b> button at the bottom of the assets list, then going to
+                the <b>Custom
+                    Token</b> tab</p>
+            <p>Add to Metamask with the following settings:</p>
+            <ul class="mm-settings list-group">
+                <li class="list-group-item">Contract: <input type="text" size="42" class="address" id="DaoTokenAddress"
+                                                             value="0xbb9bc244d798123fde783fcc1c72d3bb8c189413"> <span
+                        id="copyAddress"
+                        style="cursor:pointer; "
+                        title="Copy to clipboard">📋</span>
+                    <span id="copied" style="display:none">copied!</span>
+                </li>
+                <li class="list-group-item">Decimals: <b>16</b></li>
+                <li class="list-group-item">Symbol: DAO</li>
+                <li class="list-group-item" style="display: none" id="add-dao-panel">
+                    <button id="add-dao-token" type="button" class="btn btn-primary">Add</button>
+                </li>
+            </ul>
+
+            <hr>
+
+
+            <div id="dapp-not-connected" class="alert-primary" style="background-color: #c0e0f6">
+                <h4>Connect your wallet to check any address for DAO balances, use the WithdrawDao, or trade TheDAO
+                    token!</h4>
+                <img src="example.png" width="100%" style="max-width:442px"
+                     alt="Please connect your wallet, click the Connect Wallet button from the menu.">
+            </div>
+
+            <div class="jumbotron d-none" id="dapp">
+                <h1 class="display-4">Swap ETH/DAO via Uniswap</h1>
+                <p class="lead">Here is a simple Uniswap front-end with the bugs fixed.<br>
+                    1 DAO is now worth <span class="numeric" id="DAOtoETH_price">?</span> ETH.<br>
+                    <spam style="font-size: smaller">Slippage tolerance: 1%</spam>
+                    <br>
+                    <spam style="font-size: smaller">Transaction deadline 20 minutes</spam>
+                    <br>
+                </p>
+                <hr class="my-4">
+
+
+                <div class="row">
+                    <div class="col-8">
+                        <form>
+                            <div class="row">
+                                <div class="col form-group">You have <span class="numeric" id="ETH_balance">?</span> ETH<br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <label for="eth-out">ETH</label>
+                                    <input type="text" class="form-control" value="0" id="eth-out">
+                                </div>
+                                <div class="col form-group">
+                                    <label for="buy-dao">&nbsp;</label><br>
+                                    <input id="buy-dao" type="button" value="Buy DAO" class="btn btn-success">
+                                </div>
+                                <div class="col form-group">
+                                </div>
+                                <div class="col form-group">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">
+                                    will get you est. <span id="EthToDaoOutput" class="numeric">0</span> DAO
+                                    (Impact <span id="eth-impact">?</span>)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">You have <span class="numeric" id="DAO_balance">?</span> DAO<br>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col form-group">
+                                    <label for="dao-out">DAO</label>
+                                    <input type="text" class="form-control" value="0" id="dao-out">
+                                </div>
+                                <div class="col form-group">
+                                    <label for="sell-dao">&nbsp;</label><br>
+                                    <input id="approve-dao-button" type="button" value="Approve DAO"
+                                           class="btn btn-info">
+                                    <input id="sell-dao" type="button" value="Sell DAO" class="btn btn-danger">
+                                </div>
+                                <div class="col form-group">
+                                </div>
+                                <div class="col form-group">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">
+                                    will get you est. <span id="DaoToEthOutput" class="numeric">?</span> ETH
+                                    (Impact <span id="dao-impact">?</span>)<br>
+                                    <p style="font-size: smaller; font-style: italic; ">Important: Please make sure to
+                                        add the
+                                        DAO token to Metamask first. <a href="#mm-add">See parameters</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row" id="convert">
+                    <div class="col-8">
+                        <h3>Convert DAO to ETH via the WithdrawDAO</h3>
+                        <p>The <a href="https://etherscan.io/address/0xbf4ed7b27f1d666546e30d74d50d173d20bca754">WithdrawDao</a>
+                            is a special smart contract setup to process DAO to ETH withdrawals.<br>
+                            It does a one-way swap, DAO to ETH, and the rate's always <b>100 DAO = 1 ETH</b><br>
+                            There is also an <a
+                                    href="https://etherscan.io/address/0x755cdba6AE4F479f7164792B318b2a06c759833B#code">ExtraBalDaoWithdraw</a>
+                            contract that does 'extrabalance' refunds.
+                            <br>
+                            The following is a simple web3 UI for it.
+                        </p>
+
+                    </div>
+
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col">
+                                <P>
+                                    Connected address: <span class="address"
+                                                             id="connected-address-withdraw">0x...</span> <br>
+                                    You have <span class="numeric" id="dao-available-amount">?</span> DAO available to
+                                    withdraw<br>
+                                    You have <span class="numeric" id="dao-extra-available-amount">?</span> xDAO in the
+                                    "ExtraBalance" available to withdraw<br>
+                                </P>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+                                           role="tab"
+                                           aria-controls="home" aria-selected="true">Withdraw</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="extrabal-tab" data-toggle="tab" href="#extrabal"
+                                           role="tab"
+                                           aria-controls="extrabal" aria-selected="false">Extra Balance</a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                         aria-labelledby="home-tab">
+                                        <!-- WithdrawDAO -->
+                                        <form>
+                                            <div class="row">
+                                                <div class="col form-group">
+                                                    <label for="approve-withdrawdao-button">
+                                                        Burn your entire DAO balance, get ETH back</label>
+
+                                                    <input id="approve-withdrawdao-button" type="button"
+                                                           value="Approve WithdrawDAO" class="btn btn-info">
+                                                    <input id="withdraw-dao" type="button" value="Withdraw"
+                                                           class="btn btn-danger"> <br>
+                                                    <span id="withdraw-info" class="withdraw-info"></span>
+
+                                                </div>
+                                                <div class="col form-group">
+                                                    <label>&nbsp;</label><br>
+
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                    <div class="tab-pane fade" id="extrabal" role="tabpanel"
+                                         aria-labelledby="extrabal-tab">
+                                        <!-- ExtraBalanceWithdrawDAO -->
+
+                                        <form>
+
+                                            <div class="row">
+                                                <div class="col form-group">
+                                                    <label for="approve-withdrawdaoExtra-button">
+                                                        Burn your entire DAO Extra Balance, get back ETH</label>
+                                                    <input id="approve-withdrawdaoExtra-button" type="button"
+                                                           value="Approve TheDaoExtraBalance" class="btn btn-info">
+                                                    <input id="withdrawExtra-dao" type="button" value="Withdraw"
+                                                           class="btn btn-danger"> <br>
+                                                    <span id="withdraw-extra-info" class="withdraw-info"></span>
+                                                </div>
+                                                <div class="col form-group">
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+
+                                        <h4 id="mm-add3">Add the ExtraBalance token to your wallet first</h4>
+                                        <div class="alert alert-warning" role="alert">Important: Please add the
+                                            ExtraBalance token to Metamask manually <b>before</b>
+                                            if you want to use this feature!
+                                        </div>
+                                        <p>This can be done by clicking the <b>Add Token</b> button at the bottom of the
+                                            assets list, then going to the <b>Custom
+                                                Token</b> tab. Note that this is a separate token to the DAO token.</p>
+                                        <p>Add to Metamask with the following settings:</p>
+                                        <ul class="mm-settings list-group">
+                                            <li class="list-group-item">Contract: <input type="text" size="42"
+                                                                                         class="address"
+                                                                                         id="ExtraDaoTokenAddress"
+                                                                                         value="0x5c40ef6f527f4fba68368774e6130ce6515123f2">
+                                                <span
+                                                        id="extra-copyAddress"
+                                                        style="cursor:pointer; "
+                                                        title="Copy to clipboard">📋</span>
+                                                <span id="extra-copied" style="display:none">copied!</span>
+                                            </li>
+                                            <li class="list-group-item">Decimals: <b>16</b></li>
+                                            <li class="list-group-item">Symbol: xDAO</li>
+                                            <li class="list-group-item" style="display: none" id="add-xdao-panel">
+                                                <button id="add-xdao-token" type="button" class="btn btn-primary">Add
+                                                </button>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <form>
+                    <div>
+                        <hr>
+                        <p>Wondering if you have balances on other addresses? Check the balances for them here!<br>
+                            If you do find something, connect the address to this page to use.
+                        </p>
+                    </div>
+                    <div class="row">
+
+                        <div class="col form-group">
+                            <label for="eth-address">Ethereum Address</label>
+                            <input type="text" class="form-control" value="" id="eth-address">
+                            <small id="emailHelp" class="form-text text-muted">Enter an Ethereum address to check the
+                                balance
+                                available for withdrawal</small>
+                        </div>
+                        <div class="col form-group">
+                            <label for="sell-dao">&nbsp;</label><br>
+                            <input id="check-balance" type="button" value="Query" class="btn btn-info">
+                        </div>
+                        <div class="col form-group">
+                        </div>
+                        <div class="col form-group">
+                        </div>
+                    </div>
+                    <div id="query-result">
+                        WithdrawDAO balance available: <span id="query-result-dao">x</span><br>
+                        <a href="https://etherscan.io/address/0x5c40ef6f527f4fba68368774e6130ce6515123f2#readContract">ExtraBalToken</a>
+                        balance available: <span id="query-result-extra">x</span><br>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+</div>
+
+
+<hr>
+<div style="color: dimgray">
+    <p>⛑️ MetaMask stuck? You'll need to add the DAO token first. Here is how to get it un-stuck:</p>
+    <ul>
+        <li>Right lick the Metamask icon, "Manage extension"</li>
+        <li>Toggle the On/Off</li>
+        <li>Click on Metamask, select the Ropsten Test Network from the top</li>
+        <li>Unlock</li>
+        <li>Switch back to the Ethereum Mainnet</li>
+    </ul>
+</div>
+
+<hr>
+<div style="font-style: italic; color: dimgray">
+    Created and maintained by <a href="https://github.com/0xTycoon">@0xTycoon</a>. License: MIT <br>
+    No Uniswap front-ends were forked in making this page<br>
+    Disclaimer: When I build software, I build it for myself.<br>
+    Disclosure: 0xTycoon.eth owns a smallish amount of TheDAO tokens, some of which are providing liquidity in the
+    Uniswap pool<br>
+    <a class="github-button" href="https://github.com/0xTycoon/thedao-museum" data-icon="octicon-star" data-size="large"
+       data-show-count="true" aria-label="Star 0xTycoon/thedao-museum on GitHub">Star</a>
+</div>
+</div>
+
+
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/web3.min.js"></script>
+<script src="js/web3modal.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/js-big-decimal.min.js"></script>
+<script src="js/walletconnect/web3-provider.min.js"></script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script>
+
+    // this is where we read the reserve values from
+    const v2PoolAddress = "0xE1eCaDb5FEC254c2c893C230b935Db30b8FfF0db";
+    const v2PoolABI = [{
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "internalType": "address", "name": "owner", "type": "address"}, {
+            "indexed": true,
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+        }, {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}],
+        "name": "Approval",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "internalType": "address", "name": "sender", "type": "address"}, {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount0",
+            "type": "uint256"
+        }, {"indexed": false, "internalType": "uint256", "name": "amount1", "type": "uint256"}, {
+            "indexed": true,
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }],
+        "name": "Burn",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "internalType": "address", "name": "sender", "type": "address"}, {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount0",
+            "type": "uint256"
+        }, {"indexed": false, "internalType": "uint256", "name": "amount1", "type": "uint256"}],
+        "name": "Mint",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "internalType": "address", "name": "sender", "type": "address"}, {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount0In",
+            "type": "uint256"
+        }, {"indexed": false, "internalType": "uint256", "name": "amount1In", "type": "uint256"}, {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount0Out",
+            "type": "uint256"
+        }, {"indexed": false, "internalType": "uint256", "name": "amount1Out", "type": "uint256"}, {
+            "indexed": true,
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }],
+        "name": "Swap",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{
+            "indexed": false,
+            "internalType": "uint112",
+            "name": "reserve0",
+            "type": "uint112"
+        }, {"indexed": false, "internalType": "uint112", "name": "reserve1", "type": "uint112"}],
+        "name": "Sync",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "internalType": "address", "name": "from", "type": "address"}, {
+            "indexed": true,
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}],
+        "name": "Transfer",
+        "type": "event"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "DOMAIN_SEPARATOR",
+        "outputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "MINIMUM_LIQUIDITY",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "PERMIT_TYPEHASH",
+        "outputs": [{"internalType": "bytes32", "name": "", "type": "bytes32"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"internalType": "address", "name": "", "type": "address"}, {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+        }],
+        "name": "allowance",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+        }],
+        "name": "approve",
+        "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "to", "type": "address"}],
+        "name": "burn",
+        "outputs": [{"internalType": "uint256", "name": "amount0", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amount1",
+            "type": "uint256"
+        }],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [{"internalType": "uint8", "name": "", "type": "uint8"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "factory",
+        "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "getReserves",
+        "outputs": [{"internalType": "uint112", "name": "_reserve0", "type": "uint112"}, {
+            "internalType": "uint112",
+            "name": "_reserve1",
+            "type": "uint112"
+        }, {"internalType": "uint32", "name": "_blockTimestampLast", "type": "uint32"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "_token0", "type": "address"}, {
+            "internalType": "address",
+            "name": "_token1",
+            "type": "address"
+        }],
+        "name": "initialize",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "kLast",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "to", "type": "address"}],
+        "name": "mint",
+        "outputs": [{"internalType": "uint256", "name": "liquidity", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "name",
+        "outputs": [{"internalType": "string", "name": "", "type": "string"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "name": "nonces",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "value", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }, {"internalType": "uint8", "name": "v", "type": "uint8"}, {
+            "internalType": "bytes32",
+            "name": "r",
+            "type": "bytes32"
+        }, {"internalType": "bytes32", "name": "s", "type": "bytes32"}],
+        "name": "permit",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "price0CumulativeLast",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "price1CumulativeLast",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "to", "type": "address"}],
+        "name": "skim",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "uint256", "name": "amount0Out", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amount1Out",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+        }],
+        "name": "swap",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [{"internalType": "string", "name": "", "type": "string"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [],
+        "name": "sync",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "token0",
+        "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "token1",
+        "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+        }],
+        "name": "transfer",
+        "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"internalType": "address", "name": "from", "type": "address"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "value", "type": "uint256"}],
+        "name": "transferFrom",
+        "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }];
+
+    let v2Pool = null;
+
+
+    // approve the token first for the v2RouterAddress
+    const DaoTokenSymbol = "DAO";
+    const DaoTokenDecimals = 16;
+    const DaoTokenAddress = "0xbb9bc244d798123fde783fcc1c72d3bb8c189413";
+    const DaoTokenAbi = [{
+        "constant": true,
+        "inputs": [{"name": "", "type": "uint256"}],
+        "name": "proposals",
+        "outputs": [{"name": "recipient", "type": "address"}, {
+            "name": "amount",
+            "type": "uint256"
+        }, {"name": "description", "type": "string"}, {"name": "votingDeadline", "type": "uint256"}, {
+            "name": "open",
+            "type": "bool"
+        }, {"name": "proposalPassed", "type": "bool"}, {
+            "name": "proposalHash",
+            "type": "bytes32"
+        }, {"name": "proposalDeposit", "type": "uint256"}, {"name": "newCurator", "type": "bool"}, {
+            "name": "yea",
+            "type": "uint256"
+        }, {"name": "nay", "type": "uint256"}, {"name": "creator", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_spender", "type": "address"}, {"name": "_amount", "type": "uint256"}],
+        "name": "approve",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "minTokensToCreate",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "rewardAccount",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "daoCreator",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "divisor",
+        "outputs": [{"name": "divisor", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "extraBalance",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_proposalID", "type": "uint256"}, {"name": "_transactionData", "type": "bytes"}],
+        "name": "executeProposal",
+        "outputs": [{"name": "_success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_from", "type": "address"}, {"name": "_to", "type": "address"}, {
+            "name": "_value",
+            "type": "uint256"
+        }],
+        "name": "transferFrom",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [],
+        "name": "unblockMe",
+        "outputs": [{"name": "", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "totalRewardToken",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "actualBalance",
+        "outputs": [{"name": "_actualBalance", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "closingTime",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}],
+        "name": "allowedRecipients",
+        "outputs": [{"name": "", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_to", "type": "address"}, {"name": "_value", "type": "uint256"}],
+        "name": "transferWithoutReward",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {"constant": false, "inputs": [], "name": "refund", "outputs": [], "type": "function"}, {
+        "constant": false,
+        "inputs": [{"name": "_recipient", "type": "address"}, {
+            "name": "_amount",
+            "type": "uint256"
+        }, {"name": "_description", "type": "string"}, {
+            "name": "_transactionData",
+            "type": "bytes"
+        }, {"name": "_debatingPeriod", "type": "uint256"}, {"name": "_newCurator", "type": "bool"}],
+        "name": "newProposal",
+        "outputs": [{"name": "_proposalID", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}],
+        "name": "DAOpaidOut",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "minQuorumDivisor",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_newContract", "type": "address"}],
+        "name": "newContract",
+        "outputs": [],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "_owner", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"name": "balance", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_recipient", "type": "address"}, {"name": "_allowed", "type": "bool"}],
+        "name": "changeAllowedRecipients",
+        "outputs": [{"name": "_success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [],
+        "name": "halveMinQuorum",
+        "outputs": [{"name": "_success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}],
+        "name": "paidOut",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_proposalID", "type": "uint256"}, {"name": "_newCurator", "type": "address"}],
+        "name": "splitDAO",
+        "outputs": [{"name": "_success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "DAOrewardAccount",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "proposalDeposit",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "numberOfProposals",
+        "outputs": [{"name": "_numberOfProposals", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "lastTimeMinQuorumMet",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_toMembers", "type": "bool"}],
+        "name": "retrieveDAOReward",
+        "outputs": [{"name": "_success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [],
+        "name": "receiveEther",
+        "outputs": [{"name": "", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_to", "type": "address"}, {"name": "_value", "type": "uint256"}],
+        "name": "transfer",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "isFueled",
+        "outputs": [{"name": "", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_tokenHolder", "type": "address"}],
+        "name": "createTokenProxy",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "_proposalID", "type": "uint256"}],
+        "name": "getNewDAOAddress",
+        "outputs": [{"name": "_newDAO", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_proposalID", "type": "uint256"}, {"name": "_supportsProposal", "type": "bool"}],
+        "name": "vote",
+        "outputs": [{"name": "_voteID", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [],
+        "name": "getMyReward",
+        "outputs": [{"name": "_success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}],
+        "name": "rewardToken",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_from", "type": "address"}, {"name": "_to", "type": "address"}, {
+            "name": "_value",
+            "type": "uint256"
+        }],
+        "name": "transferFromWithoutReward",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "_owner", "type": "address"}, {"name": "_spender", "type": "address"}],
+        "name": "allowance",
+        "outputs": [{"name": "remaining", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_proposalDeposit", "type": "uint256"}],
+        "name": "changeProposalDeposit",
+        "outputs": [],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}],
+        "name": "blocked",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "curator",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "_proposalID", "type": "uint256"}, {
+            "name": "_recipient",
+            "type": "address"
+        }, {"name": "_amount", "type": "uint256"}, {"name": "_transactionData", "type": "bytes"}],
+        "name": "checkProposalCode",
+        "outputs": [{"name": "_codeChecksOut", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "privateCreation",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "inputs": [{"name": "_curator", "type": "address"}, {
+            "name": "_daoCreator",
+            "type": "address"
+        }, {"name": "_proposalDeposit", "type": "uint256"}, {
+            "name": "_minTokensToCreate",
+            "type": "uint256"
+        }, {"name": "_closingTime", "type": "uint256"}, {"name": "_privateCreation", "type": "address"}],
+        "type": "constructor"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "_from", "type": "address"}, {
+            "indexed": true,
+            "name": "_to",
+            "type": "address"
+        }, {"indexed": false, "name": "_amount", "type": "uint256"}],
+        "name": "Transfer",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "_owner", "type": "address"}, {
+            "indexed": true,
+            "name": "_spender",
+            "type": "address"
+        }, {"indexed": false, "name": "_amount", "type": "uint256"}],
+        "name": "Approval",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": false, "name": "value", "type": "uint256"}],
+        "name": "FuelingToDate",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "to", "type": "address"}, {
+            "indexed": false,
+            "name": "amount",
+            "type": "uint256"
+        }],
+        "name": "CreatedToken",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "to", "type": "address"}, {
+            "indexed": false,
+            "name": "value",
+            "type": "uint256"
+        }],
+        "name": "Refund",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "proposalID", "type": "uint256"}, {
+            "indexed": false,
+            "name": "recipient",
+            "type": "address"
+        }, {"indexed": false, "name": "amount", "type": "uint256"}, {
+            "indexed": false,
+            "name": "newCurator",
+            "type": "bool"
+        }, {"indexed": false, "name": "description", "type": "string"}],
+        "name": "ProposalAdded",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "proposalID", "type": "uint256"}, {
+            "indexed": false,
+            "name": "position",
+            "type": "bool"
+        }, {"indexed": true, "name": "voter", "type": "address"}],
+        "name": "Voted",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "proposalID", "type": "uint256"}, {
+            "indexed": false,
+            "name": "result",
+            "type": "bool"
+        }, {"indexed": false, "name": "quorum", "type": "uint256"}],
+        "name": "ProposalTallied",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "_newCurator", "type": "address"}],
+        "name": "NewCurator",
+        "type": "event"
+    }, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "_recipient", "type": "address"}, {
+            "indexed": false,
+            "name": "_allowed",
+            "type": "bool"
+        }],
+        "name": "AllowedRecipientChanged",
+        "type": "event"
+    }];
+
+    let DaoToken = null;
+
+    // do the actual swap through here using swapExactETHForTokens
+    const v2RouterAddress = "0x7a250d5630b4cf539739df2c5dacb4c659f2488d";
+    const v2RouterABI = [{
+        "inputs": [{
+            "internalType": "address",
+            "name": "_factory",
+            "type": "address"
+        }, {"internalType": "address", "name": "_WETH", "type": "address"}],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    }, {
+        "inputs": [],
+        "name": "WETH",
+        "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "tokenA", "type": "address"}, {
+            "internalType": "address",
+            "name": "tokenB",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "amountADesired", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountBDesired",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountAMin", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountBMin",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "addLiquidity",
+        "outputs": [{"internalType": "uint256", "name": "amountA", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountB",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "liquidity", "type": "uint256"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "token", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "amountTokenDesired",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountTokenMin", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETHMin",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "addLiquidityETH",
+        "outputs": [{"internalType": "uint256", "name": "amountToken", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETH",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "liquidity", "type": "uint256"}],
+        "stateMutability": "payable",
+        "type": "function"
+    }, {
+        "inputs": [],
+        "name": "factory",
+        "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "reserveIn",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "reserveOut", "type": "uint256"}],
+        "name": "getAmountIn",
+        "outputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}],
+        "stateMutability": "pure",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "reserveIn",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "reserveOut", "type": "uint256"}],
+        "name": "getAmountOut",
+        "outputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}],
+        "stateMutability": "pure",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}, {
+            "internalType": "address[]",
+            "name": "path",
+            "type": "address[]"
+        }],
+        "name": "getAmountsIn",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}, {
+            "internalType": "address[]",
+            "name": "path",
+            "type": "address[]"
+        }],
+        "name": "getAmountsOut",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "view",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountA", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "reserveA",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "reserveB", "type": "uint256"}],
+        "name": "quote",
+        "outputs": [{"internalType": "uint256", "name": "amountB", "type": "uint256"}],
+        "stateMutability": "pure",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "tokenA", "type": "address"}, {
+            "internalType": "address",
+            "name": "tokenB",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "liquidity", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountAMin",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountBMin", "type": "uint256"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "removeLiquidity",
+        "outputs": [{"internalType": "uint256", "name": "amountA", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountB",
+            "type": "uint256"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "token", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "liquidity",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountTokenMin", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETHMin",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "removeLiquidityETH",
+        "outputs": [{"internalType": "uint256", "name": "amountToken", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETH",
+            "type": "uint256"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "token", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "liquidity",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountTokenMin", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETHMin",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "removeLiquidityETHSupportingFeeOnTransferTokens",
+        "outputs": [{"internalType": "uint256", "name": "amountETH", "type": "uint256"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "token", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "liquidity",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountTokenMin", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETHMin",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }, {"internalType": "bool", "name": "approveMax", "type": "bool"}, {
+            "internalType": "uint8",
+            "name": "v",
+            "type": "uint8"
+        }, {"internalType": "bytes32", "name": "r", "type": "bytes32"}, {
+            "internalType": "bytes32",
+            "name": "s",
+            "type": "bytes32"
+        }],
+        "name": "removeLiquidityETHWithPermit",
+        "outputs": [{"internalType": "uint256", "name": "amountToken", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETH",
+            "type": "uint256"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "token", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "liquidity",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountTokenMin", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountETHMin",
+            "type": "uint256"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }, {"internalType": "bool", "name": "approveMax", "type": "bool"}, {
+            "internalType": "uint8",
+            "name": "v",
+            "type": "uint8"
+        }, {"internalType": "bytes32", "name": "r", "type": "bytes32"}, {
+            "internalType": "bytes32",
+            "name": "s",
+            "type": "bytes32"
+        }],
+        "name": "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens",
+        "outputs": [{"internalType": "uint256", "name": "amountETH", "type": "uint256"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "address", "name": "tokenA", "type": "address"}, {
+            "internalType": "address",
+            "name": "tokenB",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "liquidity", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountAMin",
+            "type": "uint256"
+        }, {"internalType": "uint256", "name": "amountBMin", "type": "uint256"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}, {
+            "internalType": "bool",
+            "name": "approveMax",
+            "type": "bool"
+        }, {"internalType": "uint8", "name": "v", "type": "uint8"}, {
+            "internalType": "bytes32",
+            "name": "r",
+            "type": "bytes32"
+        }, {"internalType": "bytes32", "name": "s", "type": "bytes32"}],
+        "name": "removeLiquidityWithPermit",
+        "outputs": [{"internalType": "uint256", "name": "amountA", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountB",
+            "type": "uint256"
+        }],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}, {
+            "internalType": "address[]",
+            "name": "path",
+            "type": "address[]"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "swapETHForExactTokens",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "payable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOutMin", "type": "uint256"}, {
+            "internalType": "address[]",
+            "name": "path",
+            "type": "address[]"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "swapExactETHForTokens",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "payable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOutMin", "type": "uint256"}, {
+            "internalType": "address[]",
+            "name": "path",
+            "type": "address[]"
+        }, {"internalType": "address", "name": "to", "type": "address"}, {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+        }],
+        "name": "swapExactETHForTokensSupportingFeeOnTransferTokens",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountOutMin",
+            "type": "uint256"
+        }, {"internalType": "address[]", "name": "path", "type": "address[]"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "swapExactTokensForETH",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountOutMin",
+            "type": "uint256"
+        }, {"internalType": "address[]", "name": "path", "type": "address[]"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "swapExactTokensForETHSupportingFeeOnTransferTokens",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountOutMin",
+            "type": "uint256"
+        }, {"internalType": "address[]", "name": "path", "type": "address[]"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "swapExactTokensForTokens",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountIn", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountOutMin",
+            "type": "uint256"
+        }, {"internalType": "address[]", "name": "path", "type": "address[]"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountInMax",
+            "type": "uint256"
+        }, {"internalType": "address[]", "name": "path", "type": "address[]"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "swapTokensForExactETH",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "inputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}, {
+            "internalType": "uint256",
+            "name": "amountInMax",
+            "type": "uint256"
+        }, {"internalType": "address[]", "name": "path", "type": "address[]"}, {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+        }, {"internalType": "uint256", "name": "deadline", "type": "uint256"}],
+        "name": "swapTokensForExactTokens",
+        "outputs": [{"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"}],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {"stateMutability": "payable", "type": "receive"}];
+
+    const WithdrawDaoAddress = "0xBf4eD7b27F1d666546E30D74d50d173d20bca754";
+    const WithdrawDaoABI = [{
+        "constant": false,
+        "inputs": [],
+        "name": "trusteeWithdraw",
+        "outputs": [],
+        "type": "function"
+    }, {"constant": false, "inputs": [], "name": "withdraw", "outputs": [], "type": "function"}, {
+        "constant": true,
+        "inputs": [],
+        "name": "mainDAO",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "trustee",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }]
+    let WithdrawDao = null;
+
+    const ExtraBalDaoWithdrawAddress = "0x755cdba6AE4F479f7164792B318b2a06c759833B";
+    const ExtraBalDaoWithdrawABI = [{
+        "constant": false,
+        "inputs": [],
+        "name": "clawback",
+        "outputs": [],
+        "type": "function"
+    }, {"constant": false, "inputs": [], "name": "withdraw", "outputs": [], "type": "function"}, {
+        "constant": true,
+        "inputs": [],
+        "name": "mainDAO",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "trustee",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }];
+    let ExtraBalDaoWithdraw = null;
+
+    const ExtraBalTokenAddress = "0x5c40ef6f527f4fba68368774e6130ce6515123f2";
+    const ExtraBalTokenABI = [{
+        "constant": false,
+        "inputs": [{"name": "_spender", "type": "address"}, {"name": "_value", "type": "uint256"}],
+        "name": "approve",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_from", "type": "address"}, {"name": "_to", "type": "address"}, {
+            "name": "_value",
+            "type": "uint256"
+        }],
+        "name": "transferFrom",
+        "outputs": [{"name": "success", "type": "bool"}],
+        "type": "function"
+    }, {"constant": false, "inputs": [], "name": "seal", "outputs": [], "type": "function"}, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "data", "type": "uint256[]"}],
+        "name": "fill",
+        "outputs": [],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [{"name": "", "type": "address"}],
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_to", "type": "address"}, {"name": "_value", "type": "uint256"}],
+        "name": "transfer",
+        "outputs": [],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [{"name": "", "type": "address"}, {"name": "", "type": "address"}],
+        "name": "allowance",
+        "outputs": [{"name": "", "type": "uint256"}],
+        "type": "function"
+    }, {
+        "constant": true,
+        "inputs": [],
+        "name": "sealed",
+        "outputs": [{"name": "", "type": "bool"}],
+        "type": "function"
+    }, {"inputs": [], "type": "constructor"}, {
+        "anonymous": false,
+        "inputs": [{"indexed": true, "name": "from", "type": "address"}, {
+            "indexed": true,
+            "name": "to",
+            "type": "address"
+        }, {"indexed": false, "name": "value", "type": "uint256"}],
+        "name": "Transfer",
+        "type": "event"
+    }];
+    let ExtraBalToken = null;
+
+
+    let v2Router = null;
+
+
+    let provider;
+    let web3Modal;
+    let web3;
+
+    let state = {
+        isConnected: false,
+        isDaoApproved: false, // is approved for the v2 router
+        selectedAccount: "",
+        balanceETH: null,
+        balanceDAO: null,
+        daoReserves: null,
+        ethReserves: null,
+        ethToDaoPrice: null,
+        daoToEthPrice: null, // spot price DAO/ETH
+        connectError: null,
+        web3BlockSub: null,
+        isSellBusy: false,
+        isBuyBusy: false,
+        tolerance: 100, // %1 default,
+
+        balanceExtraDAO: null,
+
+        isWithdrawDaoApproved: false,
+        isExtraWithdrawDaoApproved: false,
+
+        WithdrawExtraInfo: "",
+        WithdrawInfo: "",
+
+        bloom: ""
+    };
+
+    $(async function () {
+        console.log("ready!");
+
+        $("#connect").click(async function () {
+            try {
+                provider = await web3Modal.connect();
+                state.isConnected = true;
+                await init();
+                render();
+
+            } catch (e) {
+                console.log("Could not get a wallet connection", e);
+                state.connectError = e
+
+            }
+        });
+
+        const Web3Modal = window.Web3Modal.default;
+        const WalletConnectProvider = window.WalletConnectProvider.default;
+        const providerOptions = {
+            /* See Provider Options Section */
+            // infuraId: "",
+            walletconnect: {
+                package: WalletConnectProvider, // required
+                options: {
+                    infuraId: "35247c5aca8a416bb22a01e56ab022dc" // required
+                }
+            }
+        };
+
+        if (typeof window.ethereum === "object") {
+            $('#add-dao-panel').show();
+            $("#add-dao-token").on('click', async function (e) {
+                console.log("add button");
+                try {
+                    // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+                    const wasAdded = await ethereum.request({
+                        method: 'wallet_watchAsset',
+                        params: {
+                            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+                            options: {
+                                address: DaoTokenAddress, // The address that the token is at.
+                                symbol: DaoTokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+                                decimals: DaoTokenDecimals, // The number of decimals in the token
+                                image: "https://etherscan.io/token/images/thedao-logo.png", // A string url of the token logo
+                            },
+                        },
+                    });
+
+                    if (wasAdded) {
+                        toastr.success('DAO token added', 'DAO was added');
+                    } else {
+                        toastr.error('Did not add', 'Adding of the token failed');
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+
+            $('#add-xdao-panel').show();
+            $("#add-xdao-token").on('click', async function (e) {
+                console.log("add button");
+                try {
+                    // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+                    const wasAdded = await ethereum.request({
+                        method: 'wallet_watchAsset',
+                        params: {
+                            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+                            options: {
+                                address: ExtraBalTokenAddress, // The address that the token is at.
+                                symbol: "xDAO", // A ticker symbol or shorthand, up to 5 chars.
+                                decimals: DaoTokenDecimals, // The number of decimals in the token
+                                image: "https://etherscan.io/token/images/thedao-extra-logo.png", // A string url of the token logo
+                            },
+                        },
+                    });
+
+                    if (wasAdded) {
+                        toastr.success('DAO token added', 'DAO was added');
+                    } else {
+                        toastr.error('Did not add', 'Adding of the token failed');
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        web3Modal = new Web3Modal({
+            network: "mainnet", // optional
+            cacheProvider: true, // optional
+            providerOptions // required
+        });
+
+        provider = window.Web3Modal.getInjectedProvider();
+        console.log(provider);
+        if (provider === null) {
+
+        } else {
+            if (!window.web3.currentProvider.enabled) {
+                //window.web3.currentProvider.enable();
+                provider = window.web3.currentProvider;
+                try {
+
+                    await init();
+                    state.isConnected = true;
+                } catch (e) {
+                    state.isConnected = false;
+                    state.connectError = e
+                }
+
+            }
+
+            render();
+        }
+
+    });
+
+    weiToDao = function (amount) {
+        try {
+            let result = web3.utils.toBN(amount).mul(web3.utils.toBN(100)); // thedao has 16 decimals, so shift 2 decimals places
+            return web3.utils.fromWei(result);
+        } catch (e) {
+            return "0";
+        }
+    }
+
+    function render() {
+        let button = $("#connect");
+        let alert = $("#dapp-not-connected");
+        let dapp = $("#dapp");
+        if ((typeof state.selectedAccount === "undefined") || (state.selectedAccount == null)) {
+            return;
+        }
+        if ((!state.isConnected) && (state.selectedAccount.length !== 0)) {
+            button.text("Connect Wallet");
+            button.addClass("btn-primary");
+            button.removeClass("btn-secondary");
+            alert.show();
+            dapp.hide();
+        } else {
+            let ac = state.selectedAccount
+            let shortAc = ac.substring(0, 4) + '...' + ac.substring(ac.length - 4) + " connected";
+
+            button.text(shortAc)
+            button.removeClass("btn-primary");
+            button.addClass("btn-secondary");
+            alert.hide();
+            dapp.removeClass("d-none")
+            dapp.show();
+
+        }
+        if (state.balanceETH != null) {
+            let fromBalance = $("#ETH_balance");
+            fromBalance.text(web3.utils.fromWei(state.balanceETH));
+        }
+
+        if (state.balanceDAO != null) {
+            let fromBalance = $("#DAO_balance");
+            fromBalance.text(weiToDao(state.balanceDAO));
+        }
+
+        if (state.daoToEthPrice != null) {
+            $("#DAOtoETH_price").text(web3.utils.fromWei(state.daoToEthPrice));
+        }
+
+        if (!state.isDaoApproved) {
+            $("#approve-dao-button").show();
+            $("#sell-dao").attr("disabled", true);
+            $("#sell-dao").removeClass("btn-danger");
+            $("#sell-dao").addClass("btn-light");
+
+
+        } else {
+            $("#approve-dao-button").hide();
+            if (state.isSellBusy) {
+                $("#sell-dao").attr("disabled", true);
+            } else {
+                $("#sell-dao").attr("disabled", false);
+            }
+            $("#sell-dao").removeClass("btn-light");
+            $("#sell-dao").addClass("btn-danger");
+
+        }
+
+        if (state.isBuyBusy) {
+            $("#buy-dao").attr("disabled", true);
+        } else {
+            $("#buy-dao").attr("disabled", false);
+        }
+
+        $("#connected-address-withdraw").html(state.selectedAccount);
+
+        $("#dao-available-amount").html(weiToDao(state.balanceDAO));
+        $("#dao-extra-available-amount").html(weiToDao(state.balanceExtraDAO));
+
+        // Withdraw DAO
+        if (!state.isWithdrawDaoApproved) {
+            $("#approve-withdrawdao-button").show();
+
+            $("#withdraw-dao").attr("disabled", true);
+            $("#withdraw-dao").removeClass("btn-danger");
+            $("#withdraw-dao").addClass("btn-secondary");
+
+        } else {
+            $("#approve-withdrawdao-button").hide();
+
+            $("#withdraw-dao").attr("disabled", false);
+            $("#withdraw-dao").removeClass("btn-secondary");
+            $("#withdraw-dao").addClass("btn-danger");
+
+        }
+
+        // Extra Balance withdraw
+        if (!state.isExtraWithdrawDaoApproved) {
+            $("#approve-withdrawdaoExtra-button").show();
+
+            $("#withdrawExtra-dao").attr("disabled", true);
+            $("#withdrawExtra-dao").removeClass("btn-danger");
+            $("#withdrawExtra-dao").addClass("btn-secondary");
+
+        } else {
+            $("#approve-withdrawdaoExtra-button").hide();
+
+            $("#withdrawExtra-dao").attr("disabled", false);
+            $("#withdrawExtra-dao").removeClass("btn-secondary");
+            $("#withdrawExtra-dao").addClass("btn-danger");
+
+        }
+
+        $("#withdraw-extra-info").html(state.WithdrawExtraInfo);
+        $("#withdraw-info").html(state.WithdrawInfo);
+
+    }
+
+    async function updateState() {
+        let accounts = await web3.eth.getAccounts();
+        state.selectedAccount = accounts[0];
+        web3.eth.defaultAccount = state.selectedAccount;
+        state.balanceETH = await web3.eth.getBalance(state.selectedAccount);
+
+        // only update if a swap happened, or not yet called
+        if (checkBloomSwap()) {
+            if (v2Pool != null) {
+                let reserves = await v2Pool.methods.getReserves().call();
+                console.log(reserves);
+                state.daoReserves = reserves[0];
+                state.ethReserves = reserves[1];
+            }
+
+            if ((v2Router != null) && (state.daoReserves != null)) {
+                let ethAmountOut = await v2Router.methods.getAmountOut(
+                    // amountIn
+                    // BigInt("10000000000000000"), // 1 DAO
+                    web3.utils.toWei("0.0001"),
+                    // reserveIn
+                    state.daoReserves,
+                    // reserveOut
+                    state.ethReserves
+                ).call();
+                ethAmountOut = web3.utils.toBN(ethAmountOut).mul(web3.utils.toBN("100"));
+                state.daoToEthPrice = ethAmountOut;
+            }
+        }
+
+        // only update if an approval happened or not yet called
+        if (checkBloomApproval()) {
+            let allowed = await DaoToken.methods.allowance(state.selectedAccount, v2RouterAddress).call();
+            allowed = web3.utils.toBN(allowed);
+            if (allowed.cmp(web3.utils.toBN(0)) === 1) {
+                state.isDaoApproved = true;
+            } else {
+                state.isDaoApproved = false;
+            }
+            console.log("allowed:" + allowed);
+        }
+
+        // only update if a transfer happened, or not yet called
+        if (checkBloomTransfer()) {
+            state.balanceDAO = await DaoToken.methods.balanceOf(state.selectedAccount).call();
+            state.balanceExtraDAO = await ExtraBalToken.methods.balanceOf(state.selectedAccount).call();
+        }
+
+        let WithdrawAllowed = await DaoToken.methods.allowance(state.selectedAccount, WithdrawDaoAddress).call();
+        WithdrawAllowed = web3.utils.toBN(WithdrawAllowed);
+        if (WithdrawAllowed.cmp(web3.utils.toBN(0)) === 1) {
+            state.isWithdrawDaoApproved = true;
+        } else {
+            state.isWithdrawDaoApproved = false;
+        }
+        console.log("withdrawdao allowed:" + WithdrawAllowed);
+
+        let WithdrawExtraAllowed = await ExtraBalToken.methods.allowance(state.selectedAccount, WithdrawDaoAddress).call();
+        WithdrawExtraAllowed = web3.utils.toBN(WithdrawExtraAllowed);
+        if (WithdrawExtraAllowed.cmp(web3.utils.toBN(0)) === 1) {
+            state.isExtraWithdrawDaoApproved = true;
+        } else {
+            state.isExtraWithdrawDaoApproved = false;
+        }
+        console.log("extawithdrawdao allowed:" + WithdrawAllowed);
+
+        // state.WithdrawExtraInfo
+        state.WithdrawInfo = "You don't have any DAO balance to withdraw to ETH";
+        if (state.balanceDAO && state.balanceDAO.length > 0) {
+            if (web3.utils.toBN(state.balanceDAO).cmp(web3.utils.toBN(0)) > 0) {
+                state.WithdrawInfo = "This will convert your entire balance to ETH (100 DAO = 1 ETH). You may move the amount you don't want to withdraw to another wallet";
+            }
+        }
+
+        state.WithdrawExtraInfo = "You don't have any DAO Extra balance to withdraw to ETH";
+        if (state.balanceExtraDAO && state.balanceExtraDAO.length > 0) {
+            if (web3.utils.toBN(state.balanceExtraDAO).cmp(web3.utils.toBN(0)) > 0) {
+                state.WithdrawExtraInfo = "This will convert your entire extra balance to ETH (100 DAO = 1 ETH). You may move the amount you don't want to withdraw to another wallet. (This is the xDAO token)";
+            }
+        }
+
+    }
+
+
+    // check the bloom filter for ERC20 approval event
+    function checkBloomApproval() {
+        // return true if we do not know
+        if (state.bloom === "") {
+            return true;
+        }
+        if (web3.utils.isTopicInBloom(state.bloom, "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925")) {
+            console.log("bloom filter isTopicInBloom! approval!");
+        }
+        if (web3.utils.isUserEthereumAddressInBloom(state.bloom, state.selectedAccount)) {
+            console.log("bloom filter isUserEthereumAddressInBloom!!");
+        }
+        if (web3.utils.isTopicInBloom(state.bloom, "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925") &&
+            web3.utils.isUserEthereumAddressInBloom(state.bloom, state.selectedAccount)
+        ) {
+            return true;
+        }
+        return true; // temporary debug
+        //return false;
+    }
+
+    // check the bloom filter for ERC20 transfer event
+    function checkBloomTransfer() {
+        // return true if we do not know
+        if (state.bloom === "") {
+            return true;
+        }
+        if (web3.utils.isTopicInBloom(state.bloom, "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef")) {
+            console.log("bloom filter isTopicInBloom transfer!!");
+        }
+        if (web3.utils.isTopicInBloom(state.bloom, "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef") &&
+            web3.utils.isUserEthereumAddressInBloom(state.bloom, state.selectedAccount)
+        ) {
+            return true;
+        }
+        return true; // temporary debug
+        //return false;
+    }
+
+    function checkBloomSwap() {
+        // return true if we do not know
+        if (state.bloom === "") {
+            return true;
+        }
+        if (web3.utils.isContractAddressInBloom(state.bloom, DaoTokenAddress)
+        ) {
+            console.log("bloom filter isContractAddressInBloom is true!");
+            return true;
+        }
+        if (web3.utils.isTopicInBloom(state.bloom, "0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822")
+        ) {
+            console.log("bloom filter checkBloomSwap is true!");
+            return true;
+        }
+        return true; // temporary debug
+        //return false;
+    }
+
+    async function init() {
+        web3 = new Web3(provider);
+        v2Pool = new web3.eth.Contract(v2PoolABI, v2PoolAddress);
+        DaoToken = new web3.eth.Contract(DaoTokenAbi, DaoTokenAddress);
+        v2Router = new web3.eth.Contract(v2RouterABI, v2RouterAddress);
+        WithdrawDao = new web3.eth.Contract(WithdrawDaoABI, WithdrawDaoAddress);
+        ExtraBalDaoWithdraw = new web3.eth.Contract(ExtraBalDaoWithdrawABI, ExtraBalDaoWithdrawAddress);
+        ExtraBalToken = new web3.eth.Contract(ExtraBalTokenABI, ExtraBalTokenAddress);
+
+        await updateState();
+
+        provider.on("accountsChanged", async (accounts) => {
+            console.log(accounts);
+            console.log("account changed");
+            location.reload();
+            try {
+                await updateState();
+            } catch (e) {
+            }
+            render();
+        });
+
+        provider.on("chainChanged", async (accounts) => {
+            console.log(accounts);
+            console.log("account changed");
+            location.reload();
+            /*
+            try {
+                await updateState();
+            } catch (e) {
+            }
+            render();
+            */
+        });
+
+        provider.on("connect", async (info) => {
+            console.log("connected!")
+            console.log(info);
+            await updateState();
+            try {
+                render();
+            } catch (e) {
+            }
+        });
+
+        provider.on("disconnect", async (error) => {
+            console.log(error);
+            console.log("disconnected");
+            state.isConnected = false;
+            if (state.web3BlockSub != null) {
+                state.web3BlockSub.unsubscribe(function (error, success) {
+                    if (success)
+                        console.log('Successfully unsubscribed!');
+                });
+
+            }
+            state.web3BlockSub = null;
+            try {
+                render();
+            } catch (e) {
+            }
+        });
+
+        state.web3BlockSub = await web3.eth.subscribe('newBlockHeaders', async function (error, result) {
+            console.log("got new block: " + result.number);
+            state.bloom = result.logsBloom;
+            await updateState();
+            try {
+                render();
+            } catch (e) {
+            }
+        });
+
+
+        let timerid;
+        let timerid2;
+
+
+        ///////////////////////////////////////////
+        // Buy DAO
+
+        $("#eth-out").on('input', function (e) { // when user typing, update quote
+            let value = $(this).val();
+            if ($(this).data("lastval") !== value) {
+                $(this).data("lastval", value);
+                clearTimeout(timerid);
+                state.isBuyBusy = true;
+                render();
+                timerid = setTimeout(async function () {
+                    console.log(value);
+                    try {
+                        value = web3.utils.toWei(value);
+                    } catch (e) {
+                        state.isBuyBusy = false;
+                        $("#EthToDaoOutput").html("error");
+                        render();
+                        return;
+                    }
+                    if (value.toString() === "0") {
+                        state.isBuyBusy = false;
+                        $("#EthToDaoOutput").html("error");
+                        render();
+                        return;
+                    }
+                    console.log("value" + value.toString());
+                    // get the quote
+                    if ((v2Router != null) && (state.daoReserves != null)) {
+                        state.EthToDaoOutput = await v2Router.methods.getAmountOut(
+                            // amountIn
+                            BigInt(value),
+                            // reserveIn
+                            state.ethReserves,
+                            // reserveOut
+                            state.daoReserves
+                        ).call();
+                        // price of dao in wei
+
+
+                        let daoPrice = new bigDecimal(web3.utils.fromWei(state.daoToEthPrice).toString());
+                        let v1 = new bigDecimal(value);
+
+                        let assumedSpotAmount = v1.divide(daoPrice).round(0);
+
+                        let tokens = web3.utils.toBN((state.EthToDaoOutput)).mul(web3.utils.toBN(100)); // convert to 16 decimal
+                        $("#EthToDaoOutput").html(web3.utils.fromWei(tokens)); // display without tolerance
+
+                        // calculate the percent increase
+                        let starting = new bigDecimal(web3.utils.fromWei(tokens));
+                        let final = new bigDecimal(web3.utils.fromWei(assumedSpotAmount.getValue()));
+                        let change = final.subtract(starting).divide(starting).multiply(new bigDecimal("100")).round(2);
+                        // update
+                        $("#eth-impact").html(change.getValue() + "%");
+                        if (change.compareTo(new bigDecimal("1.0")) === 1) {
+                            $("#eth-impact").addClass("highImpact");
+                        } else {
+                            $("#eth-impact").removeClass("highImpact");
+                        }
+
+                        // add slippage tolerance
+                        let tolerance = web3.utils.toBN(state.EthToDaoOutput).div(web3.utils.toBN(state.tolerance)); // add percent tolerance
+                        state.EthToDaoOutput = web3.utils.toBN(state.EthToDaoOutput).sub(tolerance).toString();
+                        state.isBuyBusy = false;
+                        render();
+
+                    }
+                }, 500);
+            }
+        });
+        //107979520102722468644
+        //98849804162826261062
+
+        $("#eth-out").on('click', function (e) {
+            $(this).select();
+        });
+
+        $("#buy-dao").on('click', function () {
+
+            let ethout = web3.utils.toWei($("#eth-out").val());
+            if (isNaN(ethout) || ethout <= 0) {
+                return;
+            }
+
+            if (web3.utils.toBN(ethout).cmp(web3.utils.toBN(state.balanceETH)) > 0) {
+                toastr.error('You do not have enough ETH to sell', 'Not enough ETH');
+                return;
+            }
+
+            v2Router.methods.swapExactETHForTokens(
+                state.EthToDaoOutput.toString(), // amountOutMin
+                ["0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413"], // path
+                state.selectedAccount,
+                Math.floor(Date.now() / 1000) + 1200 // deadline + 20 min.
+
+            ).send({
+                from: state.selectedAccount,
+                value: ethout
+            }).then(function (txHash) {
+                if (txHash.status) {
+                    toastr.success('Your purchase succeeded<br>' +
+                        'TX: ' + txHash.hash, 'DAO bought');
+                } else {
+                    toastr.error('Did not buy', 'Transaction failed');
+                }
+
+            });
+
+        });
+
+        ///////////////////////////////////////////
+        // Sell DAO
+
+        $("#sell-dao").on('click', function () {
+            let daoout;
+            try {
+                daoout = web3.utils.toWei($("#dao-out").val());
+                daoout = web3.utils.toBN(daoout);
+            } catch (e) {
+                toastr.error('DAO output is invalid' + e, 'Must be a number');
+                return;
+            }
+
+            daoout = daoout.div(web3.utils.toBN("100"));
+
+            let ethToReceive;
+            ethToReceive = web3.utils.toWei($("#DaoToEthOutput").html());
+
+            // have enough DAO?
+            if (web3.utils.toBN(daoout).cmp(web3.utils.toBN(state.balanceDAO)) > 0) {
+                toastr.error('You do not have enough DAO to sell', 'Not enough DAO');
+                return;
+            }
+            v2Router.methods.swapTokensForExactETH(
+                ethToReceive, // amountOut in eth to receive
+                state.DaoToEthOutput, // amountInMax (Max DAO tokens to sell)
+                ["0xBB9bc244D798123fDe783fCc1C72d3Bb8C189413", "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"], // path
+                state.selectedAccount, // to
+                Math.floor(Date.now() / 1000) + 1200 // deadline + 20 min.
+            ).send({
+                from: state.selectedAccount,
+                value: 0
+            }).then(function (txHash) {
+                if (txHash.status) {
+                    toastr.success('Your purchase succeeded<br>' +
+                        'TX: ' + txHash.hash, 'DAO sold');
+
+                } else {
+                    toastr.error('Did not sell', 'Transaction failed');
+                }
+            });
+
+        });
+
+        $("#dao-out").on('input', function (e) {
+            let value = $(this).val();
+
+            if ($(this).data("lastval") !== value) {
+                $(this).data("lastval", value);
+                clearTimeout(timerid2);
+                state.isSellBusy = true;
+                timerid2 = setTimeout(async function () {
+                    let valueWei;
+                    try {
+                        valueWei = web3.utils.toWei(value);
+                    } catch (e) {
+                        state.isSellBusy = false;
+                        return;
+                    }
+                    valueWei = web3.utils.toBN((valueWei)).div(web3.utils.toBN(100)); // unit conversion
+                    if ((v2Router != null) && (state.daoReserves != null)) {
+                        state.DaoToEthOutput = await v2Router.methods.getAmountOut(
+                            // amountIn
+                            valueWei, //
+                            // reserveIn
+                            state.daoReserves,
+
+                            // reserveOut
+                            state.ethReserves
+                        ).call();
+                        $("#DaoToEthOutput").html(web3.utils.fromWei(state.DaoToEthOutput)); // display without tolerance
+                        // calculate the percent increase
+
+                        let daoPrice = new bigDecimal(web3.utils.fromWei(state.daoToEthPrice).toString());
+                        let v1 = new bigDecimal(valueWei);
+
+                        let assumedSpotAmount = daoPrice.multiply(v1).multiply(new bigDecimal(100)).round(0);
+
+                        console.log("assumed amount: " + web3.utils.fromWei(assumedSpotAmount.getValue()));
+                        let starting = new bigDecimal(web3.utils.fromWei(state.DaoToEthOutput));
+                        let final = new bigDecimal(web3.utils.fromWei(assumedSpotAmount.getValue()));
+                        let change = final.subtract(starting).divide(starting).multiply(new bigDecimal("100")).round(2);
+
+                        console.log("starting: " + starting.getValue() + " final: " + final.getValue());
+                        // update
+                        $("#dao-impact").html(change.getValue() + "%");
+                        if (change.compareTo(new bigDecimal("1.0")) === 1) {
+                            $("#dao-impact").addClass("highImpact");
+                        } else {
+                            $("#dao-impact").removeClass("highImpact");
+                        }
+
+
+                        let tolerance = web3.utils.toBN(state.DaoToEthOutput).div(web3.utils.toBN(state.tolerance)); // add percent tolerance
+                        state.DaoToEthOutput = web3.utils.toBN(state.DaoToEthOutput).sub(tolerance).toString();
+
+                        state.isSellBusy = false;
+                    }
+                }, 500);
+            }
+        });
+        $("#dao-out").on('click', function (e) {
+            $(this).select();
+        });
+
+
+        // Copy the address to the clipboard
+        let copyAddress = function () {
+            document.querySelector("#DaoTokenAddress").select();
+            document.execCommand("copy");
+        }
+
+        $("#copyAddress").on('click', function (e) {
+            copyAddress();
+            $("#copied").show(1, function () {
+                $(this).fadeOut(3000);
+            });
+        });
+
+        let copyAddressExtra = function () {
+            document.querySelector("#ExtraDaoTokenAddress").select();
+            document.execCommand("copy");
+        }
+
+        $("#extra-copyAddress").on('click', function (e) {
+            copyAddressExtra();
+            $("#extra-copied").show(1, function () {
+                $(this).fadeOut(3000);
+            });
+        });
+
+
+        // Approve theDAO toeken with uniswap V2 router
+        $("#approve-dao-button").on('click', async function (e) {
+            let data = "0x095ea7b3000000000000000000000000" + // approve
+                v2RouterAddress.substring(2) + // Uniswap v2 router
+                "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; // unlimited
+
+            web3.eth.sendTransaction({
+                from: state.selectedAccount,
+                to: DaoTokenAddress, // contract address
+                data: data,
+                value: "0"
+            }).then(
+                function (txHash) {
+
+                    if (txHash.status) {
+                        toastr.success('You have approved Uniswap v2 to use theDAO token<br>' +
+                            'TX: ' + txHash.hash, 'DAO Approved');
+                        state.isDaoApproved = true;
+                        render();
+
+                    } else {
+                        toastr.error('Did not approve', 'Transaction failed');
+                    }
+                    //$("#eth-out").val(0);
+                }
+            );
+
+        });
+
+        // Approve withdrawDao
+        $("#approve-withdrawdao-button").on('click', async function (e) {
+            let data = "0x095ea7b3000000000000000000000000" + // approve method
+                WithdrawDaoAddress.substring(2) + // the spender
+                "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; // unlimited
+
+            web3.eth.sendTransaction({
+                from: state.selectedAccount,
+                to: DaoTokenAddress, // contract address
+                data: data,
+                value: "0"
+            }).then(
+                function (txHash) {
+                    if (txHash.status) {
+                        toastr.success('You have approved WithdrawDAO to use your token<br>' +
+                            'TX: ' + txHash.hash, 'DAO Approved');
+                        state.isWithdrawDaoApproved = true;
+                        render();
+                    } else {
+                        toastr.error('Did not approve', 'Transaction failed');
+                    }
+                }
+            );
+        });
+
+        // Approve ExtraBalWithdrawDao
+        $("#approve-withdrawdaoExtra-button").on('click', async function (e) {
+            let data = "0x095ea7b3000000000000000000000000" + // approve method
+                ExtraBalDaoWithdrawAddress.substring(2) + // the spender
+                "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; // unlimited
+
+            web3.eth.sendTransaction({
+                from: state.selectedAccount,
+                to: ExtraBalTokenAddress, // contract address
+                data: data,
+                value: "0"
+            }).then(
+                function (txHash) {
+                    if (txHash.status) {
+                        toastr.success('You have approved WithdrawDAO to use your token with the Extra Balance contract<br>' +
+                            'TX: ' + txHash.hash, 'DAO Approved');
+                        state.isWithdrawDaoApproved = true;
+                        render();
+                    } else {
+                        toastr.error('Did not approve', 'Transaction failed');
+                    }
+                }
+            );
+        });
+
+        // Withdraw DAO
+
+        $("#withdraw-dao").on('click', async function (e) {
+            WithdrawDao.methods.withdraw().send({
+                from: state.selectedAccount
+            }).then(function (txHash) {
+                if (txHash.status) {
+                    toastr.success('Your withdraw succeeded<br>' +
+                        'TX: ' + txHash.hash, 'DAO withdrawn');
+                } else {
+                    toastr.error('Did not withdraw', 'Transaction failed');
+                }
+            });
+        });
+
+        // Extra balance withdrawal
+        $("withdrawExtra-dao").on('click', async function (e) {
+            ExtraBalDaoWithdraw.methods.withdraw().send({
+                from: state.selectedAccount
+            }).then(function (txHash) {
+                if (txHash.status) {
+                    toastr.success('Your withdraw succeeded<br>' +
+                        'TX: ' + txHash.hash, 'DAO extra-balance withdrawn');
+                } else {
+                    toastr.error('Did not withdraw', 'Transaction failed');
+                }
+            });
+        });
+
+
+        // Query balances of withdrawals
+        $("#check-balance").on('click', async function (e) {
+            let address = $("#eth-address").val();
+
+
+            if (!web3.utils.isAddress(address)) {
+                toastr.error('Please enter a valid Ethereum address starting with 0x', 'Invalid address');
+                return;
+            }
+
+            let balance = await DaoToken.methods.balanceOf(address).call();
+
+            try {
+                balance = web3.utils.toBN(balance).mul(web3.utils.toBN(100));
+                $("#query-result-dao").html(web3.utils.fromWei(balance).toString());
+            } catch (e) {
+                toastr.error('There was an error getting the balance.' + e.toString(), 'Error');
+                return
+            }
+
+            let balanceExtra = await ExtraBalToken.methods.balanceOf(address).call();
+
+            try {
+                balanceExtra = web3.utils.toBN(balanceExtra).mul(web3.utils.toBN(100));
+                $("#query-result-extra").html(web3.utils.fromWei(balanceExtra).toString());
+            } catch (e) {
+                toastr.error('There was an error getting the balance.' + e.toString(), 'Error');
+                return
+            }
+            $("#query-result").show();
+
+
+        });
+
+
+    }
+
+
+</script>
+</body>
+</html>
