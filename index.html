@@ -2101,7 +2101,7 @@
         }
         console.log("withdrawdao allowed:" + WithdrawAllowed);
 
-        let WithdrawExtraAllowed = await ExtraBalToken.methods.allowance(state.selectedAccount, WithdrawDaoAddress).call();
+        let WithdrawExtraAllowed = await ExtraBalToken.methods.allowance(state.selectedAccount, ExtraBalTokenAddress).call();
         WithdrawExtraAllowed = web3.utils.toBN(WithdrawExtraAllowed);
         if (WithdrawExtraAllowed.cmp(web3.utils.toBN(0)) === 1) {
             state.isExtraWithdrawDaoApproved = true;
