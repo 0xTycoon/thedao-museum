@@ -99,13 +99,22 @@
             font-size: smaller;
         }
 
+        #presenting {
+            background: rgb(44,111,140);
+            background: linear-gradient(90deg, rgba(44,111,140,1) 0%, rgba(102,35,121,0.19121151878720233) 97%);
+            color: white;
+            padding: 1em;
+            border-radius: 6px;
+
+        }
+
     </style>
 </head>
 <body>
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="#"><img src="img/thedao.png" width="111" height="50"></a>
+    <a class="navbar-brand" href="#" style="color: white"><img src="img/thedao.png" width="111" height="50"> thedaotoken.eth </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -124,7 +133,9 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
 
-            <h1>🏛️ TheDao Museum 🏛️</h1>
+            <h1>TheDao Token<sup>.eth<sup>️</h1>
+
+            <h3 id="presenting">Presenting, a convenient web3 UI to help you check your old wallets for some vintage DAO tokens, easily convert to ETH, or trade with other collectors! </h3>
 
             <p class="lead">TheDao (DAO) is probably a token with the most historic significance on Ethereum, <br>
                 and now it has become a scarce collector&#39;s item!</p>
@@ -147,6 +158,15 @@
             <p>The contract for TheDAO is <a class="address"
                                              href="https://etherscan.io/address/0xbb9bc244d798123fde783fcc1c72d3bb8c189413">0xbb9bc244d798123fde783fcc1c72d3bb8c189413</a>
             </p>
+            <h3>TheDAO Token DAO (new!) 🙋‍♀️💁‍♂️</h3>
+
+            <p>So, this is just a fun experiment for now. 0xTyccon, who founded this project, also acquired the thedaotoken.eth
+                domain name and placed it under a multi-sig with other DAO token collector-enthusiasts.</p>
+            <p>TheDAO tokens are used to govern this project off-chain via <a href="https://snapshot.org/#/thedaotoken.eth/">this Snapshot page</a>, and anyone holding the tokens can vote.<br>
+            What's the next step for this project? 0xTyccon says he has no idea yet. So far, it's mainly to decentralize the ownership of the .eth domain, and perhaps help this project to continue, or to help seed new related projects, and perhaps use the DAO tokens for what they have always been intended for: to govern!
+            </p>
+            <p>TheDAO Token DAO is open for donations! If this page has ever helped you find long lost DAO tokens, consider donating to the multisig address: </p>
+            <p>Multi-sig donation address: <span class="address">0x921DCc4ba6872B4736eB1A22351E2a8Ce671C3E2</span></p>
 
             <h3>Holder stats 📈</h3>
             <p>
@@ -439,6 +459,7 @@
                 <form>
                     <div>
                         <hr>
+                        <h1>Check your old wallets</h1>
                         <p>Wondering if you have balances on other addresses? Check the balances for them here!<br>
                             If you do find something, connect the address to this page to use.
                         </p>
@@ -496,6 +517,7 @@
     Disclaimer: When I build software, I build it for myself.<br>
     Disclosure: 0xTycoon.eth owns a smallish amount of TheDAO tokens, some of which are providing liquidity in the
     Uniswap pool<br>
+    Multi-sig donation address: <span class="address">0x921DCc4ba6872B4736eB1A22351E2a8Ce671C3E2</span><br>
     <a class="github-button" href="https://github.com/0xTycoon/thedao-museum" data-icon="octicon-star" data-size="large"
        data-show-count="true" aria-label="Star 0xTycoon/thedao-museum on GitHub">Star</a>
 </div>
