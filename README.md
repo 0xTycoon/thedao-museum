@@ -14,4 +14,12 @@ For the first time, the TheDAO is unearthed, and meets web3. Now that we have De
 
 ## Project Home Page
 
-Full UI here https://0xtycoon.github.io/thedao-museum/
+Domain: thedaotoken.eth
+
+Full UI is now hosted in IPFS.
+
+See the ENS "Content" record for thedaotoken.eth to get the latest IPFS content id.
+
+ot go to https://thedaotoken.eth.link
+
+Alternatively, it's deployed through the legacy web here https://0xtycoon.github.io/thedao-museum/
