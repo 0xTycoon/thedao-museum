@@ -209,9 +209,15 @@
                 try to add theDAO token.<br>
                 Uniswap shows UNKNOWN for the symbol and the values are displayed using the low-level 'wei' unit
                 instead.<br>
-                Perhaps these bugs might get fixed in the future, since they only affect the front-end.<br>
+                Perhaps these might get fixed in the future, since they only affect the front-end.<br>
 
             </p>
+            <p>
+                Update 2021-Oct-06: The token has been censored on the official
+                Uniswap website, so everyone is welcome to pin thedaotoken.eth to their IPFS node to help out and keep it decentralized!
+            </p>
+            <p>Why censored? They haven't been transparent about their decision process, but they banned it with a few other tokens and then made an announcement here <a href="https://twitter.com/Uniswap/status/1418697012095164420">https://twitter.com/Uniswap/status/1418697012095164420</a></p>
+            <p>However, the Uniswap smart contract cannot be stopped.</p>
             <h4 id="mm-add">Add the token to your wallet first</h4>
             <div class="alert alert-warning" role="alert">Important: Please add the DAO token to Metamask <b>before</b>
                 doing anything!
@@ -247,7 +253,7 @@
 
             <div class="jumbotron d-none" id="dapp">
                 <h1 class="display-4">Swap ETH/DAO via Uniswap</h1>
-                <p class="lead">Here is a simple Uniswap front-end with the bugs fixed.<br>
+                <p class="lead">Here is a simple Uniswap v2 front-end.<br>
                     1 DAO is now worth <span class="numeric" id="DAOtoETH_price">?</span> ETH.<br>
                     <spam style="font-size: smaller">Slippage tolerance: 1%</spam>
                     <br>
@@ -366,6 +372,12 @@
                                            aria-controls="extrabal" aria-selected="false">Extra Balance</a>
                                     </li>
 
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="transfer-tab" data-toggle="tab" href="#transfer"
+                                           role="tab"
+                                           aria-controls="transfer" aria-selected="false">Transfer</a>
+                                    </li>
+
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel"
@@ -420,8 +432,8 @@
 
                                         <h4 id="mm-add3">Add the ExtraBalance token to your wallet first</h4>
                                         <div class="alert alert-warning" role="alert">Important: Please add the
-                                            ExtraBalance token to Metamask manually <b>before</b>
-                                            if you want to use this feature!
+                                            ExtraBalance token to Metamask <b>before</b>
+                                            iusing this feature!
                                         </div>
                                         <p>This can be done by clicking the <b>Add Token</b> button at the bottom of the
                                             assets list, then going to the <b>Custom
@@ -447,6 +459,21 @@
                                         </ul>
 
                                     </div>
+                                    <div class="tab-pane fade" id="transfer" role="tabpanel"
+                                         aria-labelledby="transfer-tab">
+                                        <form id="transferDAOForm">
+                                            <div class="mb-3">
+                                                <label for="transferDAOTo" class="form-label">Transfer DAO To</label>
+                                                <input type="text" class="form-control" id="transferDAOTo" aria-describedby="transferToHelp">
+                                                <div id="transferToHelp" class="form-text">Ethereum address for the recipient</div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="transferAmount" class="form-label">Amount</label>
+                                                <input type="text" class="form-control" id="transferAmount" aria-describedby="transferAmountHelp">
+                                                <div id="transferAmountHelp" class="form-text">Amount of DAO tokens to send</div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" id="doTransfer">Transfer</button>
+                                        </form>
                                 </div>
                             </div>
                         </div>
@@ -2234,13 +2261,7 @@
             console.log(accounts);
             console.log("account changed");
             location.reload();
-            /*
-            try {
-                await updateState();
-            } catch (e) {
-            }
-            render();
-            */
+
         });
 
         provider.on("connect", async (info) => {
@@ -2392,6 +2413,42 @@
                     toastr.error('Did not buy', 'Transaction failed');
                 }
 
+            });
+
+        });
+
+        // transfer DAO tokens
+        $("#doTransfer").on('click', function (e) {
+            e.preventDefault();
+            let daoAmount;
+            let transferTo;
+            try {
+                daoAmount = web3.utils.toWei($("#transferAmount").val());
+                daoAmount = web3.utils.toBN(daoAmount);
+            } catch (e) {
+                toastr.error('DAO amount' + e, 'Must be a number');
+                return;
+            }
+            daoAmount = daoAmount.div(web3.utils.toBN("100")); // 16 decimals
+
+            transferTo = $("#transferDAOTo").val();
+
+            if (!web3.utils.isAddress(transferTo)) {
+                toastr.error("Transfer to address is invalid", 'Must be a number');
+                return;
+            }
+
+            console.log("transfer");
+
+            DaoToken.methods.transfer(transferTo, daoAmount.toString()).send(
+                {from: state.selectedAccount}
+            ).then(function (txHash) {
+                if (txHash.status) {
+                    toastr.success('Your transfer succeeded<br>' +
+                        'TX: ' + txHash.hash, 'DAO transferred');
+                } else {
+                    toastr.error('Did not transfer', 'Transaction failed');
+                }
             });
 
         });
