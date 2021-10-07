@@ -20,6 +20,12 @@ Full UI is now hosted in IPFS.
 
 See the ENS "Content" record for thedaotoken.eth to get the latest IPFS content id.
 
-ot go to https://thedaotoken.eth.link
+Or, here are some gateways:
+
+https://thedaotoken.eth.link
+
+https://thedaotoken.eth.limo
+
+
 
 Alternatively, it's deployed through the legacy web here https://0xtycoon.github.io/thedao-museum/
